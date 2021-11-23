@@ -14,9 +14,14 @@ class UserBaseSchema(BaseModel):
     date_of_birth: dt.date
 
 
+class UserLoginInputSchema(BaseModel):
+    email: str
+    password: str
+
+
 class UserRegisterInputSchema(UserBaseSchema):
-    password: str = Field(..., max_length=32)
-    password_2: str = Field(..., max_length=32)
+    password: str = Field(..., min_length=8, max_length=32)
+    password_2: str = Field(..., min_length=8, max_length=32)
 
     class Config:
         orm_mode = True

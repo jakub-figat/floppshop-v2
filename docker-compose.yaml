@@ -1,24 +1,33 @@
 version: "3.8"
 
 services:
-    db:
-        image: postgres:13.4
-        env_file: ./config/.env
-        volumes:
-            - pgdata:/var/lib/postgresql/data
-            - ./backend/docker/postgres:/docker-entrypoint-initdb.d
-        container_name: floppshop_postgres
-        restart: always
+  db:
+    image: postgres:13.4
+    env_file: ./config/.env
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./backend/docker/postgres:/docker-entrypoint-initdb.d
+    container_name: floppshop_postgres
+    restart: always
 
-    backend:
-        build:
-            context: ./backend
-            dockerfile: docker/python/Dockerfile
-        env_file: ./config/.env
-        container_name: floppshop_backend
-        restart: always
-        depends_on:
-            - db
+  rabbitmq:
+    image: bitnami/rabbitmq:3.9
+    ports:
+      - 15672:15672
+    volumes:
+      - rabbitmqdata:/bitnami
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: docker/python/Dockerfile
+    env_file: ./config/.env
+    container_name: floppshop_backend
+    restart: always
+    depends_on:
+      - db
+      - rabbitmq
 
 volumes:
-    pgdata:
+  pgdata:
+  rabbitmqdata:
