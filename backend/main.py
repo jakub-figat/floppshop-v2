@@ -5,8 +5,8 @@ from src.apps.user.routers import router as user_router
 from src.settings import settings
 
 app = FastAPI(
-    title="FloppHouse - Social app",
-    description="An application that makes communicating easier",
+    title="FloppShop V2",
+    description="Re-write of e-commerce app",
     version="0.1.0",
     docs_url="/api/v1/swagger",
 )
