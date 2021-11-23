@@ -1,13 +1,13 @@
 version: "3.8"
 
 services:
-  db:
+  users_db:
     image: postgres:13.4
-    env_file: ./config/.env
+    env_file: ./backend/users/config/.env
     volumes:
-      - pgdata:/var/lib/postgresql/data
-      - ./backend/docker/postgres:/docker-entrypoint-initdb.d
-    container_name: floppshop_postgres
+      - users_data:/var/lib/postgresql/data
+      - ./backend/users/docker/postgres:/docker-entrypoint-initdb.d
+    container_name: floppshop_users_db
     restart: always
 
   rabbitmq:
@@ -16,18 +16,26 @@ services:
       - 15672:15672
     volumes:
       - rabbitmqdata:/bitnami
+    container_name: floppshop_rabbitmq
 
-  backend:
+  users:
     build:
-      context: ./backend
+      context: ./backend/users
       dockerfile: docker/python/Dockerfile
-    env_file: ./config/.env
-    container_name: floppshop_backend
+    env_file: ./backend/users/config/.env
+    container_name: floppshop_users
     restart: always
     depends_on:
-      - db
+      - users_db
       - rabbitmq
+    command: uvicorn main:app --host 0.0.0.0 --port 8001 --reload --workers 4
+    stdin_open: true
+    tty: true
+    ports:
+      - 8001:8001
+    volumes:
+      - ./backend/users/:/app
 
 volumes:
-  pgdata:
+  users_data:
   rabbitmqdata:

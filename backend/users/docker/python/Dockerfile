@@ -13,7 +13,7 @@ POETRY_CACHE_DIR='/var/cache/pypoetry'
 
 RUN apt-get update -q && apt-get install -yq netcat
 
-WORKDIR /backend
+WORKDIR /app
 
 COPY ./pyproject.toml ./poetry.lock .
 RUN pip install poetry==$POETRY_VERSION
