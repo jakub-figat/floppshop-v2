@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "users"
+name = "products"
 version = "0.1.0"
 description = ""
 authors = ["jakub-figat <jakub.figat@skygate.io>"]
@@ -15,9 +15,6 @@ python-dateutil = "^2.8.2"
 python-decouple = "^3.4"
 pydantic = {extras = ["email"], version = "^1.8.2"}
 pytz = "^2021.1"
-cryptography = "^3.4.8"
-passlib = {extras = ["bcrypt"], version = "^1.7.4"}
-fastapi-mail = "^0.4.1"
 mypy = "^0.910"
 coverage = "^5.5"
 freezegun = "^1.1.0"
@@ -26,7 +23,6 @@ pytest-mock = "^3.6.1"
 tortoise-orm = {extras = ["asyncpg"], version = "^0.17.8"}
 asynctest = "^0.13.0"
 aerich = "^0.5.8"
-fastapi-jwt-auth = "^0.5.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"

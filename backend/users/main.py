@@ -24,12 +24,13 @@ app.include_router(root_router)
 
 # === Tortoise ===
 
-register_tortoise(
-    app,
-    db_url=settings.postgres_url,
-    modules=settings.APP_MODELS,
-    add_exception_handlers=True,
-)
+if settings.APP_MODELS:
+    register_tortoise(
+        app,
+        db_url=settings.postgres_url,
+        modules=settings.APP_MODELS,
+        add_exception_handlers=True,
+    )
 
 
 # === Exception handlers ===
