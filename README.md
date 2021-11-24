@@ -66,4 +66,4 @@ APP_MODELS = {
 
 ## SwaggerUI
 
-Swagger docs available at `/api/v1/swagger`
+Swagger docs available at `/api/swagger`
