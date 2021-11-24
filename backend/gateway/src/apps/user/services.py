@@ -1,22 +1,21 @@
-from typing import Union
-
-from fastapi import status
-from fastapi.encoders import jsonable_encoder
-from httpx import AsyncClient
-from starlette.responses import JSONResponse
-
-from src.apps.user.schemas import UserOutputSchema, UserRegisterSchema
+from src.apps.user.schemas import AccessTokenOutputSchema, UserLoginSchema, UserOutputSchema, UserRegisterSchema
 from src.settings import api_urls
+from src.utils.http import HTTPService
 
 
 class UserService:
     @classmethod
-    async def handle_register(cls, user_register_schema: UserRegisterSchema) -> Union[UserOutputSchema, JSONResponse]:
-        async with AsyncClient() as client:
-            request_data = jsonable_encoder(user_register_schema.dict())
-            response = await client.post(api_urls.user.register, json=request_data)
-
-        if response.status_code != status.HTTP_201_CREATED:
-            return JSONResponse(content=response.json(), status_code=response.status_code)
+    async def register(cls, user_register_schema: UserRegisterSchema) -> UserOutputSchema:
+        response = await HTTPService.make_request(
+            url=api_urls.user.register, method="POST", json=user_register_schema.dict()
+        )
 
         return UserOutputSchema(**response.json())
+
+    @classmethod
+    async def login(cls, user_login_schema: UserLoginSchema) -> AccessTokenOutputSchema:
+        response = await HTTPService.make_request(
+            url=api_urls.user.login, method="POST", json=user_login_schema.dict()
+        )
+
+        return AccessTokenOutputSchema(**response.json())
