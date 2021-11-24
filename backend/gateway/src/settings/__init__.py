@@ -1,9 +1,8 @@
-from src.settings.database import DatabaseSettings
+from src.settings.api_urls import APIUrls, api_urls
 from src.settings.general import GeneralSettings
-from src.settings.api_urls import APIUrls
 
 
-class Settings(GeneralSettings, DatabaseSettings):
+class Settings(GeneralSettings):
     pass
 
 

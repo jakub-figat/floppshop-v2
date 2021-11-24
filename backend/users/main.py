@@ -1,4 +1,4 @@
-from fastapi import APIRouter, FastAPI, Request, status
+from fastapi import FastAPI, Request, status
 from fastapi.responses import JSONResponse
 from fastapi_jwt_auth.exceptions import AuthJWTException
 from tortoise.contrib.fastapi import register_tortoise
@@ -10,16 +10,12 @@ app = FastAPI(
     title="FloppShop V2 - Users",
     description="Re-write of e-commerce app - users service",
     version="0.1.0",
-    docs_url="/api/swagger",
+    docs_url="/swagger",
 )
 
 # === Routing ===
 
-root_router = APIRouter(prefix="/api")
-
-root_router.include_router(user_router)
-
-app.include_router(root_router)
+app.include_router(user_router)
 
 
 # === Tortoise ===

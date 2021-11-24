@@ -2,5 +2,14 @@ from dataclasses import dataclass
 
 
 @dataclass(frozen=True)
+class UserAPIUrls:
+    base: str = "http://users:8001/users"
+    register: str = f"{base}/register"
+
+
+@dataclass(frozen=True)
 class APIUrls:
-    pass
+    user: UserAPIUrls = UserAPIUrls()
+
+
+api_urls = APIUrls()
