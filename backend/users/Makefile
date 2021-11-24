@@ -7,11 +7,11 @@ format:
 
 build-dev:
 	-cp -n ./config/.env.template ./config/.env
-	docker-compose build
+	docker-compose build users
 
 up-dev:
 	docker-compose run --rm users bash -c "aerich init-db && aerich upgrade"
-	docker-compose up
+	docker-compose start users
 
 backend-bash:
 	docker-compose exec users bash
@@ -44,7 +44,7 @@ migrations:
 	make aerich-migrate && make aerich-upgrade
 
 test:
-	docker-compose exec users bash  -c "TEST_MODE=true coverage run --source=src -m pytest -s $(location)"
+	docker-compose exec users bash -c "TEST_MODE=true coverage run --source=src -m pytest -s $(location)"
 
 coverage-html:
 	docker-compose exec users bash -c "coverage html"
