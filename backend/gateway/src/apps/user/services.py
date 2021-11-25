@@ -1,3 +1,5 @@
+from fastapi.requests import Request
+
 from src.apps.user.schemas import AccessTokenOutputSchema, UserLoginSchema, UserOutputSchema, UserRegisterSchema
 from src.settings import api_urls
 from src.utils.http import HTTPService
@@ -19,3 +21,12 @@ class UserService:
         )
 
         return AccessTokenOutputSchema(**response.json())
+
+    @classmethod
+    async def get_users(cls, request: Request) -> list[UserOutputSchema]:
+        response = await HTTPService.make_request(
+            url=api_urls.user.all,
+            headers=request.headers,
+        )
+
+        return [UserOutputSchema(**user_data) for user_data in response.json()]
