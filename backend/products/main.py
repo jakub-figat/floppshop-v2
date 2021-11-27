@@ -1,6 +1,7 @@
-from fastapi import APIRouter, FastAPI
+from fastapi import FastAPI
 from tortoise.contrib.fastapi import register_tortoise
 
+from src.apps.product.routers import category_router, product_router
 from src.settings import settings
 
 app = FastAPI(
@@ -10,12 +11,11 @@ app = FastAPI(
     docs_url="/api/swagger",
 )
 
+
 # === Routing ===
 
-root_router = APIRouter(prefix="/api")
-
-
-app.include_router(root_router)
+app.include_router(product_router)
+app.include_router(category_router)
 
 
 # === Tortoise ===

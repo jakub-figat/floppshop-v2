@@ -1,1 +1,1 @@
-from src.apps.product.models.product import Product
+from src.apps.product.models.product import Category, Product
