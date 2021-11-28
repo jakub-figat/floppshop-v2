@@ -10,8 +10,22 @@ class UserAPIUrls:
 
 
 @dataclass(frozen=True)
+class TokenAPIUrls:
+    base: str = "http://users:8001/token"
+    verify: str = f"{base}/verify"
+
+
+@dataclass(frozen=True)
+class ProductAPIUrls:
+    base: str = "http://products:8002/products"
+    all: str = f"{base}/"
+
+
+@dataclass(frozen=True)
 class APIUrls:
     user: UserAPIUrls = UserAPIUrls()
+    token: TokenAPIUrls = TokenAPIUrls()
+    product: ProductAPIUrls = ProductAPIUrls()
 
 
 api_urls = APIUrls()

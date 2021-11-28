@@ -41,8 +41,6 @@ services:
     command: uvicorn main:app --host 0.0.0.0 --port 8002 --reload --workers 4
     stdin_open: true
     tty: true
-    ports:
-      - 8002:8002
     volumes:
       - ./backend/products/:/app
 
@@ -68,8 +66,6 @@ services:
     command: uvicorn main:app --host 0.0.0.0 --port 8001 --reload --workers 4
     stdin_open: true
     tty: true
-    ports:
-      - 8001:8001
     volumes:
       - ./backend/users/:/app
 

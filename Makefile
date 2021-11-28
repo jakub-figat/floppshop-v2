@@ -9,3 +9,9 @@ up-dev:
 	docker-compose run --rm users bash -c "aerich init-db && aerich upgrade"
 	docker-compose run --rm products bash -c "aerich init-db && aerich upgrade"
 	docker-compose up
+
+
+format:
+	docker-compose exec gateway bash -c "isort . && black ."
+	docker-compose exec users bash -c "isort . && black ."
+	docker-compose exec products bash -c "isort . && black ."
