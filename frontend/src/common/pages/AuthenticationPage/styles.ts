@@ -20,7 +20,6 @@ export const AuthBoxWrapper = styled.div`
   background-color: ${colors.white};
   flex-direction: column;
   padding: 4rem 5rem 3rem 5rem;
-  /* justify-content: space-evenly; */
   align-items: center;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 `;
@@ -69,10 +68,10 @@ export const SubmitButton = styled.button`
   text-align: center;
   padding: 16px 14px 18px;
   color: #fff;
-  background-color: #00a82d;
-  /* :hover {
-    background-color: #1db954;
-  } */
+  background-color: ${colors.mainGreen};
+  :hover {
+    background-color: ${colors.hoverGreen};
+  }
 `;
 
 export const AuthInformationWrapper = styled.div`
@@ -81,12 +80,12 @@ export const AuthInformationWrapper = styled.div`
 
 export const AccountMessage = styled.p`
   font-size: ${fontSize.small};
-  color: #737373;
+  color: ${colors.lightGray};
 `;
 
 export const RedirectLink = styled(Link)`
   text-decoration: none;
-  color: #00a82d;
+  color: ${colors.mainGreen};
   margin-top: 10px;
 `;
 
@@ -96,6 +95,6 @@ export const Icon = styled(SVG)`
   margin-bottom: 1rem;
 
   & path {
-    fill: #00a82d;
+    fill: ${colors.mainGreen};
   }
 `;

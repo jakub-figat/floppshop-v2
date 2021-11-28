@@ -21,4 +21,7 @@ export const colors = {
   white: '#FFFFFF',
   inputBorder: '#dff2e6',
   darkText: '#333333',
+  lightGray: '#737373;',
+  mainGreen: '#00a82d;',
+  hoverGreen: '#1db954;',
 };
