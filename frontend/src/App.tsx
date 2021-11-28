@@ -1,4 +1,4 @@
-import { GlobalStyles } from 'config/globalStyles';
+import { GlobalStyles } from 'styles/globalStyles';
 import AppRoutes from 'routes/AppRoutes';
 
 const App = () => {
