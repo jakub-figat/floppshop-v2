@@ -19,7 +19,7 @@ export const AuthBoxWrapper = styled.div`
   display: flex;
   background-color: ${colors.white};
   flex-direction: column;
-  padding: 4rem 5rem 3rem 5rem;
+  padding: 3rem 5rem 2rem 5rem;
   align-items: center;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 `;

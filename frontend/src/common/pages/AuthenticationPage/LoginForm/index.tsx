@@ -1,10 +1,10 @@
 import { Formik } from 'formik';
-import { registerSchema, loginSchema } from '../validationSchema';
+import { loginSchema } from '../validationSchema';
 import TextInput from 'common/components/TextInput';
-import CaracalIcon from 'assets/icons/CaracalLogo.svg';
 import * as S from '../styles';
+import CaracalIcon from 'assets/icons/CaracalLogo.svg';
 
-const RegisterForm = () => {
+const LoginForm = () => {
   return (
     <S.AuthBoxWrapper>
       <S.Icon src={CaracalIcon} />
@@ -19,29 +19,24 @@ const RegisterForm = () => {
           username: '',
           email: '',
           password: '',
-          repeatPassword: '',
         }}
-        validationSchema={registerSchema}
+        validationSchema={loginSchema}
         onSubmit={values => console.log(values)}
       >
         {formik => (
           <S.Form onSubmit={formik.handleSubmit}>
-            <TextInput name="firstName" type="text" placeholder="First name" />
-            <TextInput name="lastName" type="text" placeholder="Last name" />
-            <TextInput name="username" type="text" placeholder="Username" />
             <TextInput name="email" type="text" placeholder="Email" />
             <TextInput name="password" type="text" placeholder="Password" />
-            <TextInput name="repeatPassword" type="text" placeholder="Repeat password" />
-            <S.SubmitButton type="submit">Sign up</S.SubmitButton>
+            <S.SubmitButton type="submit">Sign in</S.SubmitButton>
           </S.Form>
         )}
       </Formik>
       <S.AuthInformationWrapper>
-        <S.AccountMessage>Already have an account?</S.AccountMessage>
-        <S.RedirectLink to="/user/login">Log in</S.RedirectLink>
+        <S.AccountMessage>Don't have an account?</S.AccountMessage>
+        <S.RedirectLink to="/user/register">Create account</S.RedirectLink>
       </S.AuthInformationWrapper>
     </S.AuthBoxWrapper>
   );
 };
 
-export default RegisterForm;
+export default LoginForm;

@@ -1,12 +1,12 @@
-import { useParams } from 'react-router';
+import { useLocation } from 'react-router';
 import RegisterForm from './RegisterForm';
+import LoginForm from './LoginForm';
 import * as S from './styles';
 
 const AuthenticationPage = () => {
+  const { pathname } = useLocation();
   return (
-    <S.PageWrapper>
-      <RegisterForm />
-    </S.PageWrapper>
+    <S.PageWrapper>{pathname === '/user/login' ? <LoginForm /> : <RegisterForm />}</S.PageWrapper>
   );
 };
 
