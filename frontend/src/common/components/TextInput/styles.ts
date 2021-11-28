@@ -1,24 +1,26 @@
 import styled from 'styled-components';
-import { colors } from 'styles/stylesConfig';
+import { colors, fontSize } from 'styles/stylesConfig';
 
 export const Input = styled.input`
+  appearance: none;
+  margin: 0.4rem;
   padding: 6px 12px;
-  font-size: 16px;
+  width: 100%;
+  height: 3rem;
+  font-size: ${fontSize.normal};
   font-weight: 400;
-  line-height: 1.5;
   color: #212529;
   background-color: ${colors.white};
   background-clip: padding-box;
   border: 1px solid #ced4da;
-  appearance: none;
-  border-radius: 4px;
+  border-radius: 7px;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   :focus {
     color: #212529;
-    background-color: #fff;
-    border-color: #86b7fe;
+    background-color: ${colors.white};
+    border-color: ${colors.inputBorder};
     outline: 0;
-    box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%);
+    box-shadow: 0 0 0 0.1rem ${colors.inputBorder};
   }
 `;
 

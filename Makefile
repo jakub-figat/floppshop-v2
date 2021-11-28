@@ -1,7 +1,7 @@
 build-dev:
 	-cp -n ./backend/gateway/config/.env.template ./backend/gateway/config/.env
 	-cp -n ./backend/users/config/.env.template ./backend/users/config/.env
-	-cp -n .backend/products/config/.env.template ./backend/products/config/.env
+	-cp -n ./backend/products/config/.env.template ./backend/products/config/.env
 	docker-compose build
 
 
