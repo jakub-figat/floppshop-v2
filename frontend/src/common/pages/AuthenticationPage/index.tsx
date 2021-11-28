@@ -1,5 +1,13 @@
+import * as S from './styles';
+
 const AuthenticationPage = () => {
-  return <div></div>;
+  return (
+    <S.PageWrapper>
+      <S.FormWrapper>
+        <S.FormHeading>floppshop</S.FormHeading>
+      </S.FormWrapper>
+    </S.PageWrapper>
+  );
 };
 
 export default AuthenticationPage;
