@@ -25,5 +25,8 @@ export const Input = styled.input`
 `;
 
 export const ErrorMessage = styled.div`
-  color: red;
+  font-size: ${fontSize.xSmall};
+  color: ${colors.errorMessage};
+  width: 100%;
+  text-align: start;
 `;

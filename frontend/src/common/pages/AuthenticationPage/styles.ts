@@ -15,7 +15,9 @@ export const PageWrapper = styled.div`
 
 export const AuthBoxWrapper = styled.div`
   width: 30rem;
-  height: 45rem;
+  height: 50rem;
+  max-height: 55rem;
+  overflow: auto;
   display: flex;
   background-color: ${colors.white};
   flex-direction: column;
@@ -44,14 +46,13 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
-
   align-items: center;
 `;
 
 export const SubmitButton = styled.button`
   height: 48px;
   width: 100%;
-  margin-top: 0.4rem;
+  margin-top: 1rem;
   display: inline-block;
   outline: none;
   cursor: pointer;

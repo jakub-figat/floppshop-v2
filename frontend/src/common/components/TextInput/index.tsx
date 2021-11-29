@@ -14,7 +14,7 @@ const TextInput: React.FC<TextInputProps> = ({ ...props }) => {
   return (
     <>
       <S.Input {...field} {...props} />
-      {meta.error && meta.touched && <S.ErrorMessage></S.ErrorMessage>}
+      {meta.error && meta.touched && <S.ErrorMessage>{meta.error}</S.ErrorMessage>}
     </>
   );
 };

@@ -24,4 +24,5 @@ export const colors = {
   lightGray: '#737373;',
   mainGreen: '#00a82d;',
   hoverGreen: '#1db954;',
+  errorMessage: '#cc4539;',
 };
