@@ -9,8 +9,6 @@ PostgreSQL: 13.4
 
 ## Setup
 
-Srak jak nie wiesz jak
-
 Clone repository
 
 `$ git clone git@github.com:jakub-figat/floppshop-v2`
