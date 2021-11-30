@@ -1,4 +1,6 @@
 # Floppshop V2
+Project for micorservices learning puproses
+
 ```
 Python: 3.9.5
 FastAPI: 0.68
@@ -8,8 +10,6 @@ PostgreSQL: 13.4
 ```
 
 ## Setup
-
-Srak jak nie wiesz jak
 
 Clone repository
 
