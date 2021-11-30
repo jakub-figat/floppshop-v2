@@ -10,7 +10,7 @@ build-dev:
 	docker-compose build products
 
 up-dev:
-	docker-compose run --rm products bash -c "aerich init-db && aerich upgrade"
+	docker-compose run --rm products bash -c "aerich init-db; aerich upgrade"
 	docker-compose up
 
 bash:
@@ -40,8 +40,9 @@ aerich-migrate:
 aerich-upgrade:
 	docker-compose exec products bash -c "aerich upgrade"
 
-migrations:
-	make aerich-migrate && make aerich-upgrade
+aerich-migrations:
+	docker-compose exec products bash -c "aerich migrate"
+	docker-compose exec products bash -c "aerich upgrade"
 
 test:
 	docker-compose exec products bash  -c "TEST_MODE=true coverage run --source=src -m pytest -s $(location)"

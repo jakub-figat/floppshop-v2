@@ -19,9 +19,9 @@ class UserService(BaseAPIService):
         return AccessTokenOutputSchema(**response.json())
 
     async def verify_token(self) -> None:
-        await self.http_service.make_request(url=api_urls.token.verify, method="POST", raise_exception=True)
+        await self.http_service.make_auth_request(url=api_urls.token.verify, method="POST", raise_exception=True)
 
     async def get_users(self) -> list[UserOutputSchema]:
-        response = await self.http_service.make_request(url=api_urls.user.all, raise_exception=True)
+        response = await self.http_service.make_auth_request(url=api_urls.user.all, raise_exception=True)
 
         return [UserOutputSchema(**user_data) for user_data in response.json()]

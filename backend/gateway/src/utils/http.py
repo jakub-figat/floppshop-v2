@@ -1,4 +1,3 @@
-from abc import ABCMeta, abstractmethod
 from typing import Optional, Union
 
 from fastapi import HTTPException
@@ -8,6 +7,17 @@ from httpx import AsyncClient, Response
 
 
 class HTTPService:
+    def __init__(self, request: Request) -> None:
+        self.request = request
+
+    def _get_auth_header(self) -> Optional[dict[str, str]]:
+        if (auth_header := self.request.headers.get("authorization")) is not None:
+            return {"Authorization": auth_header}
+
+    def _process_json(self, json) -> Optional[Union[list, dict]]:
+        if json is not None:
+            return jsonable_encoder(json)
+
     def _raise_from_response(self, response: Response) -> None:
         """
         If response has status code from 4xx or 5xx groups, raise fastapi.HTTPException
@@ -16,11 +26,10 @@ class HTTPService:
         :return:
         """
         if response.is_error:
-            raise HTTPException(detail=response.json()["detail"], status_code=response.status_code)
+            if response.status_code >= 500:
+                raise RuntimeError(response.text)
 
-    def _process_json(self, json) -> Optional[Union[list, dict]]:
-        if json is not None:
-            return jsonable_encoder(json)
+            raise HTTPException(detail=response.json()["detail"], status_code=response.status_code)
 
     async def make_request(
         self, *, url: str, method: str = "GET", json=None, raise_exception: bool = False, **kwargs
@@ -35,19 +44,10 @@ class HTTPService:
 
         return response
 
-
-class AuthHTTPService(HTTPService):
-    def __init__(self, request: Request) -> None:
-        self.request = request
-
-    def _get_auth_header(self) -> Optional[dict[str, str]]:
-        if (auth_header := self.request.headers.get("authorization")) is not None:
-            return {"Authorization": auth_header}
-
-    async def make_request(
+    async def make_auth_request(
         self, *, url: str, method: str = "GET", json=None, raise_exception: bool = False, **kwargs
     ) -> Response:
         auth_header = self._get_auth_header()
-        return await super().make_request(
+        return await self.make_request(
             url=url, method=method, json=json, raise_exception=raise_exception, headers=auth_header, **kwargs
         )

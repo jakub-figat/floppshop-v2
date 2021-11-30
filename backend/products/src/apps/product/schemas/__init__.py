@@ -1,1 +1,6 @@
-from src.apps.product.schemas.product import CategoryOutputSchema, ProductInputSchema, ProductOutputSchema
+from src.apps.product.schemas.product import (
+    CategoryOutputSchema,
+    ProductAddInputSchema,
+    ProductInputSchema,
+    ProductOutputSchema,
+)

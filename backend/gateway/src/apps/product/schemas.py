@@ -10,6 +10,11 @@ class CategoryOutputSchema(BaseModel):
 
 
 class ProductOutputSchema(BaseModel):
+    id: UUID
     name: str
     price: Decimal
-    categories: list[UUID]
+    categories: list[CategoryOutputSchema]
+
+
+class ProductAddInputSchema(BaseModel):
+    count: int

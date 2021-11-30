@@ -15,3 +15,13 @@ CREATE TABLE IF NOT EXISTS "aerich" (
     "app" VARCHAR(20) NOT NULL,
     "content" JSONB NOT NULL
 );
+
+INSERT INTO "user" ("id", "email", "username", "password", "first_name", "last_name", "date_of_birth") VALUES (
+    uuid_generate_v4(),
+    'string@string.io',
+    'string',
+    '$2b$12$PaBJXQrK49btJx2T5wH9Be1UoVVMTl99Lmno32SzHszRIuhysmGE.',
+    'Janusz',
+    'Polski',
+    '2000-01-01'::date
+);
