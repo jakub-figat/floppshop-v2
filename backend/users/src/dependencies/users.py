@@ -1,3 +1,5 @@
+import json
+
 from fastapi import Depends
 from fastapi_jwt_auth import AuthJWT
 
@@ -11,8 +13,8 @@ async def authenticate_user(auth_jwt: AuthJWT = Depends()) -> User:
     to provide JWT Bearer token
     """
     auth_jwt.jwt_required()
-    user_id = auth_jwt.get_jwt_subject()
-    user = await User.filter(id=user_id).first()
+    user = json.loads(auth_jwt.get_jwt_subject())
+    user = await User.filter(id=user["id"]).first()
 
     if user is None:
         raise invalid_jwt_user_exception

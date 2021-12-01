@@ -1,13 +1,18 @@
 -- upgrade --
 CREATE TABLE IF NOT EXISTS "category" (
     "id" UUID NOT NULL  PRIMARY KEY,
+    "external_id" UUID NOT NULL,
     "name" VARCHAR(50) NOT NULL
 );
 CREATE TABLE IF NOT EXISTS "user" (
     "id" UUID NOT NULL  PRIMARY KEY,
+    "external_id" UUID NOT NULL,
     "email" VARCHAR(100) NOT NULL,
     "first_name" VARCHAR(30) NOT NULL,
-    "last_name" VARCHAR(30) NOT NULL
+    "last_name" VARCHAR(30) NOT NULL,
+    "username" VARCHAR(50) NOT NULL,
+    "date_of_birth" DATE NOT NULL,
+    "is_active" BOOL NOT NULL  DEFAULT True
 );
 CREATE TABLE IF NOT EXISTS "order" (
     "id" UUID NOT NULL  PRIMARY KEY,
@@ -16,6 +21,7 @@ CREATE TABLE IF NOT EXISTS "order" (
 );
 CREATE TABLE IF NOT EXISTS "product" (
     "id" UUID NOT NULL  PRIMARY KEY,
+    "external_id" UUID NOT NULL,
     "name" VARCHAR(100) NOT NULL,
     "price" DECIMAL(6,2) NOT NULL,
     "count" INT NOT NULL,

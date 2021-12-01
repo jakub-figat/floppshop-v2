@@ -1,3 +1,4 @@
+from typing import Any
 from uuid import UUID
 
 from fastapi import APIRouter, Depends, Response, status
@@ -6,7 +7,7 @@ from src.apps.product.models import Product
 from src.apps.product.schemas import ProductInputSchema, ProductOutputSchema
 from src.apps.product.schemas.product import ProductAddInputSchema, ProductListOutputSchema
 from src.apps.product.services import ProductService
-from src.dependencies import get_user_id
+from src.dependencies import get_user
 
 product_router = APIRouter(prefix="/products")
 
@@ -32,10 +33,10 @@ async def create_product(
 async def add_product_to_order(
     product_id: UUID,
     product_add_input_schema: ProductAddInputSchema,
-    user_id: str = Depends(get_user_id),
+    user: dict[str, Any] = Depends(get_user),
     product_service: ProductService = Depends(),
 ) -> dict[str, str]:
     await product_service.add_product_to_order(
-        product_id=product_id, user_id=user_id, product_add_input_schema=product_add_input_schema
+        product_id=product_id, user=user, product_add_input_schema=product_add_input_schema
     )
     return {"detail": "Product added to order successfully"}

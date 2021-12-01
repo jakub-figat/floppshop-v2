@@ -1,1 +1,1 @@
-from src.dependencies.jwt import get_user_id
+from src.dependencies.jwt import get_user

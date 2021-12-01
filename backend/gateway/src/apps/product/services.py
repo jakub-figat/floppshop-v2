@@ -13,7 +13,7 @@ class ProductService(BaseAPIService):
     async def add_product_to_order(
         self, product_id: UUID, product_add_input_schema: ProductAddInputSchema
     ) -> dict[str, str]:
-        response = await self.http_service.make_request(
+        response = await self.http_service.make_auth_request(
             url=api_urls.product.detail.format(product_id),
             method="POST",
             json=product_add_input_schema.dict(),

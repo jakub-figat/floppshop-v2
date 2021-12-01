@@ -24,7 +24,8 @@ async def login_user(
     user_login_schema: UserLoginInputSchema, auth_jwt: AuthJWT = Depends()
 ) -> AccessTokenOutputSchema:
     user = await UserAuthService.authenticate(**user_login_schema.dict())
-    access_token = auth_jwt.create_access_token(subject=str(user.id))
+    user_schema = UserOutputSchema.from_orm(user)
+    access_token = auth_jwt.create_access_token(subject=user_schema.json())
 
     return AccessTokenOutputSchema(access=access_token)
 
