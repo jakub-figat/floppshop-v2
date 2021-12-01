@@ -23,6 +23,8 @@ To run application, execute:
 
 `$ make up-dev`
 
+## Commands for each microservice
+
 ## Tools
 
 `black` and `isort` are used for code formatting
@@ -66,4 +68,4 @@ APP_MODELS = {
 
 ## SwaggerUI
 
-Swagger docs available at `/api/swagger`
+Swagger docs available at `http://localhost:8000/api/swagger`
