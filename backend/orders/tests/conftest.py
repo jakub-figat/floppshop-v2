@@ -26,7 +26,7 @@ async def async_client() -> AsyncClient:
 @pytest.fixture(scope="function")
 def use_db():
     modules_dirs = reduce(lambda list_1, list_2: list_1 + list_2, settings.APP_MODELS.values())
-    initializer(modules_dirs)
+    initializer(modules_dirs, app_label="orders")
     yield
     finalizer()
 

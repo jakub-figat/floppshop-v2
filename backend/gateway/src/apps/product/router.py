@@ -25,6 +25,4 @@ async def add_product_to_order(
     product_service: ProductService = Depends(),
 ) -> dict[str, str]:
     await user_service.verify_token()
-    return await product_service.add_product_to_order(
-        product_id=product_id, product_add_input_schema=product_add_input_schema
-    )
+    return await product_service.add_product_to_order()

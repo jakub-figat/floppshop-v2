@@ -30,7 +30,7 @@ async def registered_user_1(user_register_data: dict[str, str], use_db) -> UserO
 
 @pytest.fixture()
 async def registered_user_1_bearer_token_header(registered_user_1: UserOutputSchema) -> dict[str, str]:
-    access_token = AuthJWT().create_access_token(subject=str(registered_user_1.id))
+    access_token = AuthJWT().create_access_token(subject=str(registered_user_1))
     return {"Authorization": f"Bearer {access_token}"}
 
 
