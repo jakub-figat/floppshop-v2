@@ -1,6 +1,6 @@
 export enum ApplicationRoutes {
   main = '/',
-  register = '/register',
-  login = '/login',
+  register = '/user/register',
+  login = '/user/login',
   notFound = '*',
 }

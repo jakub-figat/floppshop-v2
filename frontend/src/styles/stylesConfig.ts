@@ -5,7 +5,7 @@ export const fontSize = {
   normal: '1rem',
   medium: '1.25rem',
   large: '1.5rem',
-  extraLarge: '2rem',
+  extraLarge: '2.5rem',
 };
 
 export const fontWeight = {
@@ -18,10 +18,11 @@ export const fontWeight = {
 };
 
 export const colors = {
-  background: '#2F4858',
-  darkMain: '#0B4F5A',
-  main: '#3C727B',
-  lightMain: '#6D959C',
   white: '#FFFFFF',
-  border: '#CEDCDE',
+  inputBorder: '#dff2e6',
+  darkText: '#333333',
+  lightGray: '#737373;',
+  mainGreen: '#00a82d;',
+  hoverGreen: '#1db954;',
+  errorMessage: '#cc4539;',
 };
