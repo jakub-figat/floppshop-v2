@@ -1,6 +1,14 @@
+from uuid import UUID
+
 from fastapi import APIRouter, Depends, status
 
-from src.apps.user.schemas import AccessTokenOutputSchema, UserLoginSchema, UserOutputSchema, UserRegisterSchema
+from src.apps.user.schemas import (
+    AccessTokenOutputSchema,
+    UserLoginSchema,
+    UserOutputSchema,
+    UserRegisterSchema,
+    UserUpdateSchema,
+)
 from src.apps.user.services import UserService
 
 router = APIRouter(prefix="/users")
@@ -23,3 +31,13 @@ async def login_user(
 @router.get("/", response_model=list[UserOutputSchema], status_code=status.HTTP_200_OK)
 async def get_users(user_service: UserService = Depends()) -> list[UserOutputSchema]:
     return await user_service.get_users()
+
+
+@router.get("/me", response_model=UserOutputSchema, status_code=status.HTTP_200_OK)
+async def get_logged_user(user_service: UserService = Depends()) -> UserOutputSchema:
+    return await user_service.get_logged_user()
+
+
+@router.put("/me", response_model=UserOutputSchema, status_code=status.HTTP_200_OK)
+async def update_user(user_schema: UserUpdateSchema, user_service: UserService = Depends()) -> UserOutputSchema:
+    return await user_service.update_user(user_schema)

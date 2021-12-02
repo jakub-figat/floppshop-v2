@@ -1,1 +1,1 @@
-from src.apps.user.services.user import UserAuthService
+from src.apps.user.services.user import UserAuthService, UserService

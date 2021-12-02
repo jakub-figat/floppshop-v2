@@ -11,6 +11,7 @@ class UserAPIUrls:
     register: str = f"{base}/register"
     login: str = f"{base}/login"
     all: str = f"{base}/"
+    me: str = f"{base}/me"
 
 
 @dataclass(frozen=True)

@@ -13,6 +13,18 @@ class UserBaseSchema(BaseModel):
     email: str
     date_of_birth: dt.date
 
+    @validator("date_of_birth")
+    def validate_date_of_birth(cls, date_of_birth: dt.date) -> dt.date:
+        if date_of_birth >= dt.date.today():
+            raise ValueError("Date of birth must be in the past.")
+
+        return date_of_birth
+
+    @validator("email")
+    def validate_email(cls, email: str) -> str:
+        validate_email(email)
+        return email
+
 
 class UserLoginInputSchema(BaseModel):
     email: str
@@ -32,18 +44,6 @@ class UserRegisterInputSchema(UserBaseSchema):
             raise ValueError("Second password differs from first one.")
 
         return password_2
-
-    @validator("date_of_birth")
-    def validate_date_of_birth(cls, date_of_birth: dt.date) -> dt.date:
-        if date_of_birth >= dt.date.today():
-            raise ValueError("Date of birth must be in the past.")
-
-        return date_of_birth
-
-    @validator("email")
-    def validate_email(cls, email: str) -> str:
-        validate_email(email)
-        return email
 
 
 class UserInputSchema(UserBaseSchema):

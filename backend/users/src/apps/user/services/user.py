@@ -1,9 +1,14 @@
 from typing import Any
+from uuid import UUID
+
+from fastapi import Depends
+from fastapi.encoders import jsonable_encoder
 
 from src.apps.user.exceptions import auth_exception
 from src.apps.user.models import User
-from src.apps.user.schemas import UserOutputSchema, UserRegisterInputSchema
+from src.apps.user.schemas import UserInputSchema, UserOutputSchema, UserRegisterInputSchema
 from src.apps.user.utils import password_context
+from src.utils.aio_pika import AIOPikaService
 
 
 class UserAuthService:
@@ -26,3 +31,22 @@ class UserAuthService:
             raise auth_exception
 
         return user
+
+
+class UserService:
+    def __init__(self, aio_pika_service: AIOPikaService = Depends()) -> None:
+        self.aio_pika_service = aio_pika_service
+
+    async def _send_update_user_event(self, user_schema: UserOutputSchema) -> None:
+        user_data = user_schema.dict()
+        user_data["external_id"] = user_data.pop("id")
+        updated_users = [user_data]
+
+        await self.aio_pika_service.send_message(data=jsonable_encoder(updated_users), routing_key="user.update")
+
+    async def update_user(self, user_id: UUID, user_schema: UserInputSchema) -> UserOutputSchema:
+        await User.filter(id=user_id).update(**user_schema.dict())
+        user_schema = UserOutputSchema.from_orm(await User.get(id=user_id))
+        await self._send_update_user_event(user_schema)
+
+        return user_schema

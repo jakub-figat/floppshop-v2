@@ -22,6 +22,14 @@ class UserRegisterSchema(UserBaseSchema):
     password_2: str = Field(..., min_length=8, max_length=32)
 
 
+class UserUpdateSchema(BaseModel):
+    first_name: str = Field(..., max_length=30)
+    last_name: str = Field(..., max_length=30)
+    username: str = Field(..., max_length=30)
+    email: str
+    date_of_birth: dt.date
+
+
 class UserOutputSchema(UserBaseSchema):
     id: UUID
     is_active: bool

@@ -5,9 +5,10 @@ from src.settings.database import DatabaseSettings
 from src.settings.email import EmailSettings
 from src.settings.general import GeneralSettings
 from src.settings.jwt import AuthJWTSettings
+from src.settings.rabbitmq import RabbitMQSettings
 
 
-class Settings(GeneralSettings, DatabaseSettings, EmailSettings, AuthJWTSettings):
+class Settings(GeneralSettings, DatabaseSettings, EmailSettings, AuthJWTSettings, RabbitMQSettings):
     pass
 
 

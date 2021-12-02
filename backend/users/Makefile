@@ -13,7 +13,7 @@ up-dev:
 	docker-compose run --rm users bash -c "aerich init-db; aerich upgrade"
 	docker-compose start users
 
-backend-bash:
+bash:
 	docker-compose exec users bash
 
 db-bash:

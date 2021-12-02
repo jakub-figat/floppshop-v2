@@ -1,4 +1,12 @@
-from src.apps.user.schemas import AccessTokenOutputSchema, UserLoginSchema, UserOutputSchema, UserRegisterSchema
+from uuid import UUID
+
+from src.apps.user.schemas import (
+    AccessTokenOutputSchema,
+    UserLoginSchema,
+    UserOutputSchema,
+    UserRegisterSchema,
+    UserUpdateSchema,
+)
 from src.settings import api_urls
 from src.utils.services import BaseAPIService
 
@@ -25,3 +33,13 @@ class UserService(BaseAPIService):
         response = await self.http_service.make_auth_request(url=api_urls.user.all, raise_exception=True)
 
         return [UserOutputSchema(**user_data) for user_data in response.json()]
+
+    async def get_logged_user(self) -> UserOutputSchema:
+        response = await self.http_service.make_auth_request(url=api_urls.user.me, raise_exception=True)
+        return UserOutputSchema(**response.json())
+
+    async def update_user(self, user_schema: UserUpdateSchema) -> UserOutputSchema:
+        response = await self.http_service.make_auth_request(
+            url=api_urls.user.me, method="PUT", json=user_schema.dict(), raise_exception=True
+        )
+        return UserOutputSchema(**response.json())
