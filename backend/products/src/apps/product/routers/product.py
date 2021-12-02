@@ -1,11 +1,13 @@
+from typing import Any
 from uuid import UUID
 
-from fastapi import APIRouter, status
+from fastapi import APIRouter, Depends, Response, status
 
 from src.apps.product.models import Product
 from src.apps.product.schemas import ProductInputSchema, ProductOutputSchema
-from src.apps.product.schemas.product import ProductListOutputSchema
+from src.apps.product.schemas.product import ProductAddInputSchema, ProductListOutputSchema
 from src.apps.product.services import ProductService
+from src.dependencies import get_user
 
 product_router = APIRouter(prefix="/products")
 
@@ -21,5 +23,20 @@ async def get_product(product_id: UUID) -> ProductOutputSchema:
 
 
 @product_router.post("/", response_model=ProductOutputSchema, status_code=status.HTTP_201_CREATED)
-async def create_product(product_input_schema: ProductInputSchema) -> ProductOutputSchema:
-    return await ProductService.create_product(product_input_schema)
+async def create_product(
+    product_input_schema: ProductInputSchema, product_service: ProductService = Depends()
+) -> ProductOutputSchema:
+    return await product_service.create_product(product_input_schema)
+
+
+@product_router.post("/{product_id}", status_code=status.HTTP_200_OK)
+async def add_product_to_order(
+    product_id: UUID,
+    product_add_input_schema: ProductAddInputSchema,
+    user: dict[str, Any] = Depends(get_user),
+    product_service: ProductService = Depends(),
+) -> dict[str, str]:
+    await product_service.add_product_to_order(
+        product_id=product_id, user=user, product_add_input_schema=product_add_input_schema
+    )
+    return {"detail": "Product added to order successfully"}

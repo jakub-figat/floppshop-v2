@@ -1,5 +1,4 @@
 from fastapi import APIRouter, Depends, status
-from fastapi.requests import Request
 
 from src.apps.user.schemas import AccessTokenOutputSchema, UserLoginSchema, UserOutputSchema, UserRegisterSchema
 from src.apps.user.services import UserService
@@ -22,5 +21,5 @@ async def login_user(
 
 
 @router.get("/", response_model=list[UserOutputSchema], status_code=status.HTTP_200_OK)
-async def get_users(request: Request, user_service: UserService = Depends()) -> list[UserOutputSchema]:
-    return await user_service.get_users(request)
+async def get_users(user_service: UserService = Depends()) -> list[UserOutputSchema]:
+    return await user_service.get_users()

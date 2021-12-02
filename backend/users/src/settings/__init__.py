@@ -4,10 +4,10 @@ from src.settings.api_urls import APIUrls
 from src.settings.database import DatabaseSettings
 from src.settings.email import EmailSettings
 from src.settings.general import GeneralSettings
-from src.settings.jwt import AuthJWTConfig
+from src.settings.jwt import AuthJWTSettings
 
 
-class Settings(GeneralSettings, DatabaseSettings, EmailSettings, AuthJWTConfig):
+class Settings(GeneralSettings, DatabaseSettings, EmailSettings, AuthJWTSettings):
     pass
 
 

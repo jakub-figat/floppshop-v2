@@ -3,7 +3,8 @@ from fastapi.responses import JSONResponse
 from fastapi_jwt_auth.exceptions import AuthJWTException
 from tortoise.contrib.fastapi import register_tortoise
 
-from src.apps.user.routers import router as user_router
+from src.apps.user.routers import jwt_router
+from src.apps.user.routers import user_router as user_router
 from src.settings import settings
 
 app = FastAPI(
@@ -16,6 +17,7 @@ app = FastAPI(
 # === Routing ===
 
 app.include_router(user_router)
+app.include_router(jwt_router)
 
 
 # === Tortoise ===

@@ -1,34 +1,53 @@
-from typing import Any, Optional, Union
+from typing import Optional, Union
 
 from fastapi import HTTPException
-from fastapi.datastructures import Headers
 from fastapi.encoders import jsonable_encoder
+from fastapi.requests import Request
 from httpx import AsyncClient, Response
 
 
 class HTTPService:
-    @classmethod
-    def _get_auth_header(cls, headers: Optional[Headers]) -> Optional[dict[str, Any]]:
-        if headers is not None and (auth_header := headers.get("authorization")) is not None:
+    def __init__(self, request: Request) -> None:
+        self.request = request
+
+    def _get_auth_header(self) -> Optional[dict[str, str]]:
+        if (auth_header := self.request.headers.get("authorization")) is not None:
             return {"Authorization": auth_header}
 
-    @classmethod
-    def _process_json(cls, json) -> Optional[Union[list, dict]]:
+    def _process_json(self, json) -> Optional[Union[list, dict]]:
         if json is not None:
             return jsonable_encoder(json)
 
-    @classmethod
-    async def make_request(cls, *, url: str, method: str = "GET", json=None, **kwargs) -> Response:
-        json = cls._process_json(json)
-        auth_headers = cls._get_auth_header(kwargs.pop("headers", None))
+    def _raise_from_response(self, response: Response) -> None:
+        """
+        If response has status code from 4xx or 5xx groups, raise fastapi.HTTPException
+        with status code and body of the response. If valid, do nothing.
+        :param response:
+        :return:
+        """
+        if response.is_error:
+            if response.status_code >= 500:
+                raise RuntimeError(response.text)
+
+            raise HTTPException(detail=response.json()["detail"], status_code=response.status_code)
+
+    async def make_request(
+        self, *, url: str, method: str = "GET", json=None, raise_exception: bool = False, **kwargs
+    ) -> Response:
+        json = self._process_json(json)
 
         async with AsyncClient() as client:
-            response = await client.request(url=url, method=method, json=json, headers=auth_headers, **kwargs)
+            response = await client.request(url=url, method=method, json=json, **kwargs)
 
-        if response.is_error:
-            raise HTTPException(
-                detail=response.json()["detail"],
-                status_code=response.status_code,
-            )
+        if raise_exception and response.is_error:
+            self._raise_from_response(response)
 
         return response
+
+    async def make_auth_request(
+        self, *, url: str, method: str = "GET", json=None, raise_exception: bool = False, **kwargs
+    ) -> Response:
+        auth_header = self._get_auth_header()
+        return await self.make_request(
+            url=url, method=method, json=json, raise_exception=raise_exception, headers=auth_header, **kwargs
+        )
