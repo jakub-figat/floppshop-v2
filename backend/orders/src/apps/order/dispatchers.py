@@ -18,7 +18,7 @@ class ProductQueueDispatcher(BaseQueueDispatcher):
     @classmethod
     async def add_product_to_order(cls, message: IncomingMessage) -> None:
         data = json.loads(message.body.decode("utf-8"))
-        await OrderService().add_product_to_order(product_schema=OrderProductAddInputSchema(**data))
+        await OrderService().add_product_to_order(order_schema=OrderProductAddInputSchema(**data))
 
     @classmethod
     async def dispatch(cls, message: IncomingMessage) -> None:

@@ -32,9 +32,9 @@ class OrderService:
         await product.categories.add(*categories)
 
     @classmethod
-    async def add_product_to_order(cls, product_schema: OrderProductAddInputSchema) -> None:
-        product_data = product_schema.product.dict()
-        user_schema = product_schema.user
+    async def add_product_to_order(cls, order_schema: OrderProductAddInputSchema) -> None:
+        product_data = order_schema.product.dict()
+        user_schema = order_schema.user
         user = await cls.update_or_create_user(user_schema)
         order = await Order.create(user=user)
 
