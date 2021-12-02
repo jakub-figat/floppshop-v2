@@ -3,7 +3,7 @@ import { colors, fontSize } from 'styles/stylesConfig';
 
 export const Input = styled.input`
   appearance: none;
-  margin: 0.4rem;
+  margin: 0.2rem 0;
   padding: 6px 12px;
   width: 100%;
   height: 3rem;
