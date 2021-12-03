@@ -15,19 +15,20 @@ export const PageWrapper = styled.div`
 
 export const AuthBoxWrapper = styled.div`
   width: 30rem;
-  height: 50rem;
-  max-height: 55rem;
+  height: auto;
+  max-height: 50rem;
   overflow: auto;
   display: flex;
   background-color: ${colors.white};
   flex-direction: column;
-  padding: 3rem 5rem 2rem 5rem;
+  padding: 2rem 5rem 2rem 5rem;
   align-items: center;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 `;
 
 export const HeadingWrapper = styled.div`
   text-align: center;
+  margin-bottom: 2rem;
 `;
 
 export const FormHeading = styled.h2`
@@ -42,7 +43,6 @@ export const SubHeading = styled.p`
 
 export const Form = styled.form`
   width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -57,7 +57,6 @@ export const SubmitButton = styled.button`
   outline: none;
   cursor: pointer;
   font-size: ${fontSize.xSmall};
-  line-height: 1;
   border-radius: 7px;
   transition-property: background-color, border-color, color, box-shadow, filter;
   transition-duration: 0.3s;
@@ -77,6 +76,7 @@ export const SubmitButton = styled.button`
 
 export const AuthInformationWrapper = styled.div`
   text-align: center;
+  margin-top: 2rem;
 `;
 
 export const AccountMessage = styled.p`
@@ -91,8 +91,10 @@ export const RedirectLink = styled(Link)`
 `;
 
 export const Icon = styled(SVG)`
-  width: 5rem;
-  height: 5rem;
+  min-width: 5rem;
+  min-height: 5rem;
+  max-width: 5rem;
+  max-height: 5rem;
   margin-bottom: 1rem;
 
   & path {
