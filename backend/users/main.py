@@ -14,7 +14,13 @@ app = FastAPI(
     docs_url="/swagger",
 )
 
+
+@app.get("/health", status_code=status.HTTP_200_OK)
+async def make_health_check() -> dict[str, str]:
+    return {"detail": "Healthy"}
+
 # === Routing ===
+
 
 app.include_router(user_router)
 app.include_router(jwt_router)

@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, status
 from tortoise.contrib.fastapi import register_tortoise
 
 from src.apps.product.routers import category_router, product_router
@@ -28,5 +28,9 @@ if settings.APP_MODELS:
         add_exception_handlers=True,
     )
 
+
+@app.get("/health", status_code=status.HTTP_200_OK)
+async def make_health_check() -> dict[str, str]:
+    return {"detail": "Healthy"}
 
 # === Exception handlers ===

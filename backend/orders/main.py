@@ -1,6 +1,6 @@
 import asyncio
 
-from fastapi import FastAPI
+from fastapi import FastAPI, status
 from tortoise.contrib.fastapi import register_tortoise
 
 from src.settings import settings
@@ -12,6 +12,11 @@ app = FastAPI(
     version="0.1.0",
     docs_url="/api/swagger",
 )
+
+
+@app.get("/health", status_code=status.HTTP_200_OK)
+async def make_health_check() -> dict[str, str]:
+    return {"detail": "Healthy"}
 
 
 # === Routing ===

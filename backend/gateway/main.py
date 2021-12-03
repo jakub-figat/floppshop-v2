@@ -1,4 +1,4 @@
-from fastapi import APIRouter, FastAPI
+from fastapi import APIRouter, FastAPI, status
 from fastapi.middleware.cors import CORSMiddleware
 
 from src.apps.product.router import product_router
@@ -21,6 +21,11 @@ app.add_middleware(
     allow_headers="*",
     allow_methods="*",
 )
+
+
+@app.get("/health", status_code=status.HTTP_200_OK)
+async def make_health_check() -> dict[str, str]:
+    return {"detail": "Healthy"}
 
 
 # === Routing ===
