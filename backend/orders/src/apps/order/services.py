@@ -54,8 +54,8 @@ class UserService:
                 return user
 
     @classmethod
-    @atomic()
     async def _update_users(cls, existing_users: list[User], existing_user_schemas: list[UserInputSchema]) -> None:
+        # TODO: make this atomic with connection name argument passed, so tests could work
         for schema in existing_user_schemas:
             existing_user = cls._get_existing_user_by_external_id(schema.external_id, existing_users)
             existing_user.update_from_dict(schema.dict())

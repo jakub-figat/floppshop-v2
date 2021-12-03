@@ -3,7 +3,7 @@ from typing import Optional, Union
 from fastapi import HTTPException
 from fastapi.encoders import jsonable_encoder
 from fastapi.requests import Request
-from httpx import AsyncClient, Response
+from httpx import AsyncClient, Response, AsyncHTTPTransport
 
 
 class HTTPService:
@@ -36,7 +36,8 @@ class HTTPService:
     ) -> Response:
         json = self._process_json(json)
 
-        async with AsyncClient() as client:
+        transport = AsyncHTTPTransport(retries=2)
+        async with AsyncClient(transport=transport) as client:
             response = await client.request(url=url, method=method, json=json, **kwargs)
 
         if raise_exception and response.is_error:
