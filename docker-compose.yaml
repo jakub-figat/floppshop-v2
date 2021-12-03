@@ -118,7 +118,8 @@ services:
     container_name: floppshop_frontend
     restart: always
     stdin_open: true
-    ports: -3000:3000
+    ports:
+      - 3000:3000
     volumes:
       - ./frontend:/frontend
       - /frontend/node_modules
