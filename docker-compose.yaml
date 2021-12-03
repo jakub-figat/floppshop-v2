@@ -111,6 +111,19 @@ services:
     container_name: floppshop_rabbitmq
     env_file: ./backend/config/.env
 
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: ./Dockerfile
+    container_name: floppshop_frontend
+    restart: always
+    stdin_open: true
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend:/frontend
+      - /frontend/node_modules
+
 volumes:
   users_data:
   products_data:
