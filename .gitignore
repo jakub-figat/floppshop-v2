@@ -248,4 +248,12 @@ artifacts/
 celerybeat.pid
 celerybeat-schedule
 
-backend/invoices/
+
+# terraform
+
+# Compiled files
+*.tfstate
+*.tfstate.backup
+.terraform.tfstate.lock.info
+# Module directory
+.terraform/
