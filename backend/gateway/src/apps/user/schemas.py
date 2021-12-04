@@ -1,6 +1,7 @@
 import datetime as dt
 from uuid import UUID
 
+from humps import camelize
 from pydantic import BaseModel, Field
 
 
@@ -11,10 +12,18 @@ class UserBaseSchema(BaseModel):
     email: str
     date_of_birth: dt.date
 
+    class Config:
+        alias_generator = camelize
+        allow_population_by_field_name = True
+
 
 class UserLoginSchema(BaseModel):
     email: str
     password: str
+
+    class Config:
+        alias_generator = camelize
+        allow_population_by_field_name = True
 
 
 class UserRegisterSchema(UserBaseSchema):
@@ -29,6 +38,10 @@ class UserUpdateSchema(BaseModel):
     email: str
     date_of_birth: dt.date
 
+    class Config:
+        alias_generator = camelize
+        allow_population_by_field_name = True
+
 
 class UserOutputSchema(UserBaseSchema):
     id: UUID
@@ -37,3 +50,7 @@ class UserOutputSchema(UserBaseSchema):
 
 class AccessTokenOutputSchema(BaseModel):
     access: str
+
+    class Config:
+        alias_generator = camelize
+        allow_population_by_field_name = True
