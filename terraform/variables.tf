@@ -37,3 +37,8 @@ variable "app_count" {
   description = "Number of ECS Service running tasks"
   default     = 3
 }
+
+variable "ecs_task_execution_role_name" {
+  description = "ECS task execution role name"
+  default     = "myEcsTaskExecutionRole"
+}
