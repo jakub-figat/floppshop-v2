@@ -33,7 +33,6 @@ class UserQueueDispatcher(BaseQueueDispatcher):
     @classmethod
     async def update_users(cls, message: IncomingMessage) -> None:
         data = json.loads(message.body.decode("utf-8"))
-        print(data)
         user_schemas = [UserInputSchema(**user) for user in data]
         await UserService.update_users(user_schemas)
 

@@ -105,7 +105,7 @@ services:
       - ./backend/users/:/app
 
   rabbitmq:
-    image: bitnami/rabbitmq:3.9
+    image: rabbitmq:3.9
     volumes:
       - rabbitmq_data:/bitnami
     container_name: floppshop_rabbitmq
