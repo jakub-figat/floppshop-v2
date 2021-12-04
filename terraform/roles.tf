@@ -3,11 +3,11 @@ data "aws_iam_policy_document" "ecs_task_execution_role" {
   statement {
     sid     = ""
     effect  = "Allow"
-    actions = ["sts:assumeRole"]
+    actions = ["sts:AssumeRole"]
 
     principals {
       identifiers = ["ecs-tasks.amazonaws.com"]
-      type        = "service"
+      type        = "Service"
     }
   }
 }
