@@ -12,11 +12,11 @@ type GenericHttpRequestParams = {
     withCredentials?: boolean,
 }
 
-type MakeRequestParams = {
+export type MakeRequestParams = {
     url: string,
     method: HttpRequestMethod,
     body?: unknown;
-    responseType?: unknown
+    responseType?: any
     withCredentials?: boolean;
 }
 
