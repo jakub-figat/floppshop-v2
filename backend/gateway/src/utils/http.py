@@ -3,7 +3,7 @@ from typing import Optional, Union
 from fastapi import HTTPException
 from fastapi.encoders import jsonable_encoder
 from fastapi.requests import Request
-from httpx import AsyncClient, Response, AsyncHTTPTransport
+from httpx import AsyncClient, AsyncHTTPTransport, Response
 
 
 class HTTPService:
