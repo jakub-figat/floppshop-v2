@@ -11,8 +11,8 @@ class AIOPikaService:
     async def send_message(self, data: dict[str, Any], routing_key: str) -> None:
         connection = await aio_pika.connect(
             host=settings.RABBITMQ_HOST,
-            login=settings.RABBITMQ_USERNAME,
-            password=settings.RABBITMQ_PASSWORD,
+            login=settings.RABBITMQ_DEFAULT_USER,
+            password=settings.RABBITMQ_DEFAULT_PASS,
             port=settings.RABBITMQ_PORT,
         )
 

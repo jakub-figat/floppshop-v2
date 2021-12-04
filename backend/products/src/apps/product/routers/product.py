@@ -36,5 +36,7 @@ async def add_product_to_order(
     user: dict[str, Any] = Depends(get_user),
     product_service: ProductService = Depends(),
 ) -> dict[str, str]:
-    await product_service.add_product_to_order()
+    await product_service.add_product_to_order(
+        product_id=product_id, user=user, product_add_input_schema=product_add_input_schema
+    )
     return {"detail": "Product added to order successfully"}

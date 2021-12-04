@@ -17,8 +17,8 @@ async def on_message(message: IncomingMessage, dispatcher_class: Type[BaseQueueD
 async def listen(loop: AbstractEventLoop) -> None:
     connection = await aio_pika.connect_robust(
         host=settings.RABBITMQ_HOST,
-        login=settings.RABBITMQ_USERNAME,
-        password=settings.RABBITMQ_PASSWORD,
+        login=settings.RABBITMQ_DEFAULT_USER,
+        password=settings.RABBITMQ_DEFAULT_PASS,
         port=settings.RABBITMQ_PORT,
         loop=loop,
     )
