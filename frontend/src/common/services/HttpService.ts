@@ -10,17 +10,13 @@ export class HttpServicce extends AbstractHttpService {
     body,
   }: MakeRequestParams): Promise<AxiosResponse<any, any>> {
     const concatenatedUrl = HttpServicce.attachEndpointToPort(backendPort, url);
-
-    const headers = {
-      'content-type': 'application/json',
-    };
+    const contentType = HttpServicce.setContentTypeHeader(method);
 
     const requestConfig = {
-      body,
+      data: body,
       method,
-      headers,
+      headers: contentType,
     };
-
     return axios(concatenatedUrl, requestConfig)
       .then(response => {
         return response;

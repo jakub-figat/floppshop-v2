@@ -7,8 +7,7 @@ import { authService } from 'config/rootService';
 
 const RegisterForm = () => {
   const createAccount = (values: any) => {
-    console.log('cos');
-    authService.register(values).then(response => console.log(response, 'lord pazdan'));
+    authService.register(values);
   };
 
   return (

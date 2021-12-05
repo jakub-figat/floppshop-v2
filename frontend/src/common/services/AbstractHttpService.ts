@@ -16,7 +16,6 @@ export abstract class AbstractHttpService {
   public get<R>({ url }: HttpGetRequest): Promise<R> {
     return this.makeRequest({
       url,
-
       method: HttpRequestMethod.GET,
     });
   }
@@ -55,4 +54,10 @@ export abstract class AbstractHttpService {
   public static attachEndpointToPort = (backendPort: string, url: AppEndpoints): string => {
     return backendPort.concat(url);
   };
+
+  public static setContentTypeHeader(method: HttpRequestMethod): Record<string, string> {
+    const isJsonData = method === HttpRequestMethod.POST || HttpRequestMethod.PUT;
+
+    return isJsonData ? { 'content-type': 'application/json' } : {};
+  }
 }
