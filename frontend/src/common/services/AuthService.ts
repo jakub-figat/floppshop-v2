@@ -1,13 +1,23 @@
 import { HttpServicce } from './HttpService';
-
-const url = 'localhost:8000/api/user/register';
+import { userEndpoints } from 'config/variables';
 
 export class AuthService {
   constructor(private httpService: HttpServicce) {}
 
-  public register(userData: any): Promise<any> {
+  public register(body: unknown): Promise<any> {
     return this.httpService
-      .get({ url })
+      .post({ url: userEndpoints.register, body })
+      .then(response => {
+        return response;
+      })
+      .catch(error => {
+        throw new Error(error);
+      });
+  }
+
+  public login(body: unknown): Promise<any> {
+    return this.httpService
+      .post({ url: userEndpoints.login, body })
       .then(response => {
         return response;
       })

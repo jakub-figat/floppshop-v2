@@ -1,26 +1,27 @@
-import { AbstractHttpService, MakeRequestParams } from './AbstractHttpService';
-import axios from 'axios';
+import { backendPort } from 'config/variables';
+import { AbstractHttpService } from './AbstractHttpService';
+import { MakeRequestParams } from './types';
+import axios, { AxiosResponse } from 'axios';
 
 export class HttpServicce extends AbstractHttpService {
   protected makeRequest({
     url,
     method,
     body,
-    responseType,
-    withCredentials,
-  }: MakeRequestParams): any {
-    // const bodyData = body && JSON.stringify(body);
+  }: MakeRequestParams): Promise<AxiosResponse<any, any>> {
+    const concatenatedUrl = HttpServicce.attachEndpointToPort(backendPort, url);
+
     const headers = {
       'content-type': 'application/json',
     };
-    const options = {
+
+    const requestConfig = {
       body,
       method,
       headers,
-      responseType,
     };
 
-    return axios(url, options)
+    return axios(concatenatedUrl, requestConfig)
       .then(response => {
         return response;
       })

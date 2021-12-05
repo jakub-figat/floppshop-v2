@@ -1,10 +1,16 @@
 import { Formik } from 'formik';
-import { registerSchema, loginSchema } from '../validationSchema';
+import { registerSchema } from '../validationSchema';
 import TextInput from 'common/components/TextInput';
 import CaracalIcon from 'assets/icons/CaracalLogo.svg';
 import * as S from '../styles';
+import { authService } from 'config/rootService';
 
 const RegisterForm = () => {
+  const createAccount = (values: any) => {
+    console.log('cos');
+    authService.register(values).then(response => console.log(response, 'lord pazdan'));
+  };
+
   return (
     <S.AuthBoxWrapper>
       <S.Icon src={CaracalIcon} />
@@ -18,11 +24,15 @@ const RegisterForm = () => {
           lastName: '',
           username: '',
           email: '',
+          dateOfBirth: '2021-12-01',
           password: '',
-          repeatPassword: '',
+          password2: '',
         }}
         validationSchema={registerSchema}
-        onSubmit={values => console.log(values)}
+        onSubmit={values => {
+          console.log(values, 'values');
+          createAccount(values);
+        }}
       >
         {formik => (
           <S.Form onSubmit={formik.handleSubmit}>
@@ -31,7 +41,7 @@ const RegisterForm = () => {
             <TextInput name="username" type="text" placeholder="Username" />
             <TextInput name="email" type="text" placeholder="Email" />
             <TextInput name="password" type="text" placeholder="Password" />
-            <TextInput name="repeatPassword" type="text" placeholder="Repeat password" />
+            <TextInput name="password2" type="text" placeholder="Repeat password" />
             <S.SubmitButton type="submit">Sign up</S.SubmitButton>
           </S.Form>
         )}
