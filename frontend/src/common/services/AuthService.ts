@@ -1,8 +1,8 @@
-import { HttpServicce } from './HttpService';
+import { HttpService } from './HttpService';
 import { userEndpoints } from 'config/variables';
 
 export class AuthService {
-  constructor(private readonly httpService: HttpServicce) {}
+  constructor(private readonly httpService: HttpService) {}
 
   public register(body: unknown): Promise<any> {
     return this.httpService

@@ -3,6 +3,7 @@ import { loginSchema } from '../validationSchema';
 import TextInput from 'common/components/TextInput';
 import * as S from '../styles';
 import CaracalIcon from 'assets/icons/CaracalLogo.svg';
+import { authService } from 'config/rootService';
 
 const LoginForm = () => {
   return (
@@ -14,19 +15,16 @@ const LoginForm = () => {
       </S.HeadingWrapper>
       <Formik
         initialValues={{
-          firstName: '',
-          lastName: '',
-          username: '',
           email: '',
           password: '',
         }}
         validationSchema={loginSchema}
-        onSubmit={values => console.log(values)}
+        onSubmit={formData => authService.login(formData)}
       >
         {formik => (
           <S.Form onSubmit={formik.handleSubmit}>
             <TextInput name="email" type="text" placeholder="Email" />
-            <TextInput name="password" type="text" placeholder="Password" />
+            <TextInput name="password" type="password" placeholder="Password" />
             <S.SubmitButton type="submit">Sign in</S.SubmitButton>
           </S.Form>
         )}

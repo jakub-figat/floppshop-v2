@@ -23,14 +23,14 @@ const RegisterForm = () => {
           lastName: '',
           username: '',
           email: '',
-          dateOfBirth: '2021-12-01',
+          dateOfBirth: '2021-12-01', // @Jakub F. wyjebiesz to kiedys z tego backendu?
           password: '',
           password2: '',
         }}
         validationSchema={registerSchema}
-        onSubmit={values => {
-          console.log(values, 'values');
-          createAccount(values);
+        onSubmit={formData => {
+          console.log(formData, 'values');
+          createAccount(formData);
         }}
       >
         {formik => (
@@ -39,8 +39,8 @@ const RegisterForm = () => {
             <TextInput name="lastName" type="text" placeholder="Last name" />
             <TextInput name="username" type="text" placeholder="Username" />
             <TextInput name="email" type="text" placeholder="Email" />
-            <TextInput name="password" type="text" placeholder="Password" />
-            <TextInput name="password2" type="text" placeholder="Repeat password" />
+            <TextInput name="password" type="password" placeholder="Password" />
+            <TextInput name="password2" type="password" placeholder="Repeat password" />
             <S.SubmitButton type="submit">Sign up</S.SubmitButton>
           </S.Form>
         )}

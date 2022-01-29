@@ -3,14 +3,14 @@ import { AbstractHttpService } from './AbstractHttpService';
 import { MakeRequestParams } from './types';
 import axios, { AxiosResponse } from 'axios';
 
-export class HttpServicce extends AbstractHttpService {
+export class HttpService extends AbstractHttpService {
   protected makeRequest({
     url,
     method,
     body,
   }: MakeRequestParams): Promise<AxiosResponse<any, any>> {
-    const concatenatedUrl = HttpServicce.attachEndpointToPort(backendPort, url);
-    const contentType = HttpServicce.setContentTypeHeader(method);
+    const concatenatedUrl = HttpService.attachEndpointToPort(backendPort, url);
+    const contentType = HttpService.setContentTypeHeader(method);
 
     const requestConfig = {
       data: body,
