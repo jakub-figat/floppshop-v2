@@ -6,8 +6,8 @@ import * as S from '../styles';
 import { authService } from 'config/rootService';
 
 const RegisterForm = () => {
-  const createAccount = (values: any) => {
-    authService.register(values);
+  const createAccount = async (values: any) => {
+    await authService.register(values);
   };
 
   return (
@@ -28,9 +28,9 @@ const RegisterForm = () => {
           password2: '',
         }}
         validationSchema={registerSchema}
-        onSubmit={formData => {
+        onSubmit={async formData => {
           console.log(formData, 'values');
-          createAccount(formData);
+          await createAccount(formData);
         }}
       >
         {formik => (

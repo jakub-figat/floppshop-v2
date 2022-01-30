@@ -1,5 +1,5 @@
 import { AppEndpoints } from 'config/variables';
-import { HttpRequestMethod, MakeRequestParams } from './types';
+import { HttpRequestMethod, MakeRequestParams, HttpResponse } from '../types';
 
 type GenericHttpRequestParams = {
   url: AppEndpoints;
@@ -13,14 +13,14 @@ type HttpPutRequest = GenericHttpRequestParams & { body?: unknown };
 type HttpDeleteRequest = GenericHttpRequestParams;
 
 export abstract class AbstractHttpService {
-  public get<R>({ url }: HttpGetRequest): Promise<R> {
+  public get({ url }: HttpGetRequest) {
     return this.makeRequest({
       url,
       method: HttpRequestMethod.GET,
     });
   }
 
-  public post({ url, body }: HttpPostRequest): Promise<any> {
+  public post({ url, body }: HttpPostRequest) {
     return this.makeRequest({
       url,
       method: HttpRequestMethod.POST,
@@ -28,7 +28,7 @@ export abstract class AbstractHttpService {
     });
   }
 
-  public put({ url, body }: HttpPutRequest): Promise<any> {
+  public put({ url, body }: HttpPutRequest) {
     return this.makeRequest({
       url,
       method: HttpRequestMethod.PUT,
@@ -36,7 +36,7 @@ export abstract class AbstractHttpService {
     });
   }
 
-  public delete({ url }: HttpDeleteRequest): Promise<any> {
+  public delete({ url }: HttpDeleteRequest) {
     return this.makeRequest({
       url,
       method: HttpRequestMethod.DELETE,

@@ -1,4 +1,4 @@
-import { HttpService } from './HttpService';
+import { HttpService } from './http';
 import { userEndpoints } from 'config/variables';
 
 export class AuthService {

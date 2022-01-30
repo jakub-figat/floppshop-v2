@@ -15,3 +15,10 @@ export type MakeRequestParams = {
   responseType?: any;
   withCredentials?: boolean;
 };
+
+export interface HttpResponse<T = unknown> {
+  headers: Record<string, string>;
+  status: number;
+  url: string;
+  data: T;
+}

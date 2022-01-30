@@ -1,6 +1,6 @@
 import { backendPort } from 'config/variables';
 import { AbstractHttpService } from './AbstractHttpService';
-import { MakeRequestParams } from './types';
+import { MakeRequestParams } from '../types';
 import axios, { AxiosResponse } from 'axios';
 
 export class HttpService extends AbstractHttpService {
